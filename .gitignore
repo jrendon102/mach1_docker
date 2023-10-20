@@ -1,0 +1,18 @@
+# Docker Compose and Volumes
+docker_compose/**
+volumes/**
+
+# IDE and Editor Files
+.vscode/
+.idea/
+
+# Temporary and Log Files
+logs/
+tmp/
+*.log
+*.json
+*.tar
+*.gz
+
+# Compiled Python Files
+*.pyc
