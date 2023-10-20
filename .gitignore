@@ -2,6 +2,9 @@
 docker_compose/**
 volumes/**
 
+# Docker config should not be tracked
+docker-config.yml
+
 # IDE and Editor Files
 .vscode/
 .idea/
