@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mach1_robot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEW_USER=${CONTAINER_USER}
+    image: mach1:${IMAGE_TAG}
+    container_name: ${CONTAINER_NAME}
+    hostname: ${CONTAINER_HOSTNAME}
+    environment:
+      - REMOTE_IP=${REMOTE_IP_ADDR}
+      - REMOTE_HOST=${REMOTE_HOSTNAME}
+    networks:
+      mynetwork:
+        ipv4_address: ${CONTAINER_STATIC_IP}
+    volumes:
+      - ../../mach1_code:/home/${CONTAINER_USER}/mach1_code
+      - ../config/hosts:/etc/hosts
+    command: [ "bash", "-c", "while true; do sleep 1; done" ]
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: ${CONTAINER_SUBNET}
