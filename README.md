@@ -26,12 +26,7 @@ To create a Docker Compose file and set up the Docker containers for your Mach1 
    - `docker_compose`: This directory contains Docker Compose files.
    - `volumes`: It is reserved for storing associated volumes and configurations.
 
-This structured approach ensures that your Docker setup remains well-organized, making it easier to manage configuration files and directories.
-
-
-4. Deploy the Docker containers using the generated `docker-compose.yml` file with the command `docker-compose up -d`. The Docker containers will be configured as specified in the `docker-compose.yml` file.
-
-
+4. Deploy the Docker container using the generated `docker-compose.yml` file with the command `docker-compose up -d`. The Docker container will be configured as specified in the `docker-compose.yml` file.
 
 ## License
 This repository is released under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
