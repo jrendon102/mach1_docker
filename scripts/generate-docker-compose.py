@@ -27,6 +27,18 @@ GENERATED_FILES = {
     VOLUMES_DIR: [HOST_VOLUME_TEMPLATE, "host"],
 }
 
+CONFIG_DATA = {
+    "IMAGE_TAG": "",
+    "CONTAINER_NAME": "",
+    "CONTAINER_USER": "",
+    "CONTAINER_HOSTNAME": "",
+    "CONTAINER_LOOPBACK_IP": "",
+    "CONTAINER_STATIC_IP": "",
+    "CONTAINER_SUBNET": "",
+    "REMOTE_HOSTNAME": "",
+    "REMOTE_IP_ADDR": "",
+}
+
 
 def read_replace_write(
     docker_config: dict, dir_path: str, template_file: str, output_file_name: str
@@ -59,8 +71,29 @@ def read_replace_write(
         file.write(generated_file)
 
 
+def create_docker_config() -> None:
+    """
+    Create a Docker configuration file if it doesn't exist and populate it with user-provided values.
+
+    The configuration values are stored as plain strings in the YAML file.
+
+    Returns:
+        None
+    """
+    if os.path.exists(DOCKER_CONFIG):
+        return
+
+    for key in CONFIG_DATA:
+        value = str(input(f"Enter value for {key}: "))
+        CONFIG_DATA[key] = value
+
+    with open(DOCKER_CONFIG, "w") as yaml_file:
+        yaml.dump(CONFIG_DATA, yaml_file, default_flow_style=False)
+
+
 if __name__ == "__main__":
-    # Load variables from the config file
+    create_docker_config()
+
     with open(DOCKER_CONFIG, "r") as config_file:
         docker_config = yaml.safe_load(config_file)
 
