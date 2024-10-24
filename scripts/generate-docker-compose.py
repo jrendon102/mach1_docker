@@ -24,10 +24,11 @@ HOST_VOLUME_TEMPLATE = os.path.join(CONFIG_DIR, "host-template.yml")
 # Define a dictionary that helps generate directories containing files used for Docker configurations.
 GENERATED_FILES = {
     DOCKER_COMPOSE_DIR: [DOCKER_COMPOSE_TEMPLATE, "docker-compose.yml"],
-    VOLUMES_DIR: [HOST_VOLUME_TEMPLATE, "host"],
+    VOLUMES_DIR: [HOST_VOLUME_TEMPLATE, "hosts"],
 }
 
 CONFIG_DATA = {
+    "IMAGE_NAME": "",
     "IMAGE_TAG": "",
     "CONTAINER_NAME": "",
     "CONTAINER_USER": "",
