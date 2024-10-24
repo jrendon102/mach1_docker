@@ -1,6 +1,6 @@
 # Docker Compose and Volumes
 docker_compose/**
-volumes/**
+# volumes/**
 
 # Docker config should not be tracked
 docker-config.yml
