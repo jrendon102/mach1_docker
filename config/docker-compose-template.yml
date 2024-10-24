@@ -1,9 +1,9 @@
 services:
   mach1_robot:
     build:
-      context: .
+      context: ..
       # TODO: This might need to be updated to support .dev/.prod and update the RELAVATIVE path
-      dockerfile: ../docker/Dockerfile.dev
+      dockerfile: docker/Dockerfile.dev
       args:
         - USERNAME=${CONTAINER_USER}
     image: ${IMAGE_NAME}:${IMAGE_TAG}
@@ -19,8 +19,7 @@ services:
       # - ../../machx_code:/home/${CONTAINER_USER}/machx_code
       - ../volumes/entrypoint.sh:/home/${CONTAINER_USER}/entrypoint.sh
       - ../volumes/hosts:/etc/hosts
-    entrypoint: ["entrypoint.sh"]
-    command: ["bash", "-c", "while true; do sleep 1; done"]
+    entrypoint: ["/home/${CONTAINER_USER}/entrypoint.sh"]
 
 networks:
   mynetwork:

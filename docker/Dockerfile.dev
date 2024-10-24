@@ -27,6 +27,11 @@ RUN apt-get update \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/*
 
+# NOTE: This step ensures the entrypoint.sh script is present in the container and has the correct executable permissions.
+# It's necessary because files copied from a Windows host might not have the right permissions set.
+COPY ../volumes/entrypoint.sh /home/$USERNAME/entrypoint.sh
+RUN chmod +x /home/$USERNAME/entrypoint.sh
+
 # Switch to non-root user
 USER $USERNAME
 WORKDIR /home/$USERNAME
