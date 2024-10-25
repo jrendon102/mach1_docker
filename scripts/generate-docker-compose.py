@@ -8,6 +8,7 @@ It helps create directories containing files used for Docker configurations with
 when building images.
 """
 import os
+
 import yaml
 
 # Directories relative to this directory
@@ -41,9 +42,7 @@ CONFIG_DATA = {
 }
 
 
-def read_replace_write(
-    docker_config: dict, dir_path: str, template_file: str, output_file_name: str
-) -> None:
+def read_replace_write(docker_config: dict, dir_path: str, template_file: str, output_file_name: str) -> None:
     """
     Generate a configuration file by reading a template file, replacing placeholders
     with values from docker_config, and saving the result to the specified directory.
