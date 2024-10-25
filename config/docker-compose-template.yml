@@ -16,7 +16,7 @@ services:
       mynetwork:
         ipv4_address: ${CONTAINER_STATIC_IP}
     volumes:
-      # - ../../machx_code:/home/${CONTAINER_USER}/machx_code
+      - ../../machx_code:/home/${CONTAINER_USER}/machx_code
       - ../volumes/entrypoint.sh:/home/${CONTAINER_USER}/entrypoint.sh
       - ../volumes/hosts:/etc/hosts
     entrypoint: ["/home/${CONTAINER_USER}/entrypoint.sh"]
