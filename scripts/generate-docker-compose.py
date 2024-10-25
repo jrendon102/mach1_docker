@@ -8,6 +8,7 @@ It helps create directories containing files used for Docker configurations with
 when building images.
 """
 import os
+
 import yaml
 
 # Directories relative to this directory
@@ -24,10 +25,11 @@ HOST_VOLUME_TEMPLATE = os.path.join(CONFIG_DIR, "host-template.yml")
 # Define a dictionary that helps generate directories containing files used for Docker configurations.
 GENERATED_FILES = {
     DOCKER_COMPOSE_DIR: [DOCKER_COMPOSE_TEMPLATE, "docker-compose.yml"],
-    VOLUMES_DIR: [HOST_VOLUME_TEMPLATE, "host"],
+    VOLUMES_DIR: [HOST_VOLUME_TEMPLATE, "hosts"],
 }
 
 CONFIG_DATA = {
+    "IMAGE_NAME": "",
     "IMAGE_TAG": "",
     "CONTAINER_NAME": "",
     "CONTAINER_USER": "",
@@ -40,9 +42,7 @@ CONFIG_DATA = {
 }
 
 
-def read_replace_write(
-    docker_config: dict, dir_path: str, template_file: str, output_file_name: str
-) -> None:
+def read_replace_write(docker_config: dict, dir_path: str, template_file: str, output_file_name: str) -> None:
     """
     Generate a configuration file by reading a template file, replacing placeholders
     with values from docker_config, and saving the result to the specified directory.

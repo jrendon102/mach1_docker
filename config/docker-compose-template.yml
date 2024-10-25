@@ -1,13 +1,12 @@
-version: '3'
-
 services:
   mach1_robot:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      # TODO: This might need to be updated to support .dev/.prod and update the RELAVATIVE path
+      dockerfile: docker/Dockerfile.dev
       args:
-        - NEW_USER=${CONTAINER_USER}
-    image: mach1:${IMAGE_TAG}
+        - USERNAME=${CONTAINER_USER}
+    image: ${IMAGE_NAME}:${IMAGE_TAG}
     container_name: ${CONTAINER_NAME}
     hostname: ${CONTAINER_HOSTNAME}
     environment:
@@ -17,9 +16,10 @@ services:
       mynetwork:
         ipv4_address: ${CONTAINER_STATIC_IP}
     volumes:
-      - ../../mach1_code:/home/${CONTAINER_USER}/mach1_code
-      - ../config/hosts:/etc/hosts
-    command: [ "bash", "-c", "while true; do sleep 1; done" ]
+      - ../../machx_code:/home/${CONTAINER_USER}/machx_code
+      - ../volumes/entrypoint.sh:/home/${CONTAINER_USER}/entrypoint.sh
+      - ../volumes/hosts:/etc/hosts
+    entrypoint: ["/home/${CONTAINER_USER}/entrypoint.sh"]
 
 networks:
   mynetwork:

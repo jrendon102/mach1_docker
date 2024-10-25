@@ -1,0 +1,37 @@
+FROM ros:iron-perception-jammy
+
+RUN apt-get update && \
+    apt-get install -y \
+    python3-pip \
+    net-tools \
+    tree \
+    vim \
+    wget && \
+    rosdep update && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install gpiozero
+
+ARG USERNAME=rpi
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# Create non-root user
+RUN  groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && mkdir /home/$USERNAME/.config && chown $USER_UID:$USER_GID /home/$USERNAME/.config
+
+# Set up sudo for non-root user
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && rm -rf /var/lib/apt/lists/*
+
+# NOTE: This step ensures the entrypoint.sh script is present in the container and has the correct executable permissions.
+# It's necessary because files copied from a Windows host might not have the right permissions set.
+COPY ../volumes/entrypoint.sh /home/$USERNAME/entrypoint.sh
+RUN chmod +x /home/$USERNAME/entrypoint.sh
+
+# Switch to non-root user
+USER $USERNAME
+WORKDIR /home/$USERNAME

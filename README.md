@@ -1,9 +1,9 @@
-# Mach1 Docker Configuration
+# machx_docker
 
 ## Overview
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-GNU%20GPL-blue.svg)](LICENSE)
 
-The **Mach1 Docker Configuration** repository contains the necessary Docker configuration files and scripts for setting up Docker containers tailored for the Mach1 Robot Project. These Docker containers facilitate the deployment of various components of the robot's software stack, ensuring portability and ease of use across different environments.
+The **machx_docker** repository contains the necessary Docker configuration files and scripts for setting up Docker containers. These Docker containers facilitate the deployment of various components of the robot's software stack, ensuring portability and ease of use across different environments.
 
 ## Contents
 This repository includes the following components:
@@ -15,7 +15,7 @@ This repository includes the following components:
 - `generate-docker-compose.py`: A Python script that reads the `docker-config.yml` file, replaces the placeholders in the `docker-compose-template.yml` with the provided values, and generates the final Docker Compose file (`docker-compose.yml`) ready for use.
 
 ## Usage
-To create a Docker Compose file and set up the Docker containers for your Mach1 Robot Project:
+To create a Docker Compose file and set up the Docker containers:
 
 1. Modify the values in the `docker-config.yml` file, located in the `config` directory, to match your deployment requirements.
 
