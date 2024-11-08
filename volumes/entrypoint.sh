@@ -19,5 +19,19 @@ touch /home/$USERNAME/.Xauthority
 # Add the X11 authentication cookie to the .Xauthority file
 xauth add "$DISPLAY" "$XAUTH_PROTOCOL" "$XAUTH_KEY"
 
+MACHX_CODE_DIR="/home/$USERNAME/machx_code"
+if [ -d "$MACHX_CODE_DIR" ]; then
+    echo "Navigating to ROS workspace at $MACHX_CODE_DIR"
+    cd "$MACHX_CODE_DIR"
+
+    echo "Building ROS workspace"
+    colcon build
+
+    source "$MACHX_CODE_DIR/install/setup.bash"
+    echo "source $MACHX_CODE_DIR/install/setup.bash" >> ~/.bashrc
+else
+    echo "ROS workspace directory not found at $MACHX_CODE_DIR"
+fi
+
 # Keep the container running indefinitely
 exec tail -f /dev/null
