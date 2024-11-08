@@ -1,4 +1,0 @@
-${CONTAINER_LOOPBACK_IP}    localhost
-::1           localhost ip6-localhost ip6-loopback
-${CONTAINER_STATIC_IP}    ${CONTAINER_HOSTNAME} 
-${REMOTE_IP_ADDR}   ${REMOTE_HOSTNAME}

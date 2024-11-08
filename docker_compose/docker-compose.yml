@@ -1,0 +1,19 @@
+services:
+  machx_robot:
+    build:
+      context: .
+      dockerfile: ../docker/Dockerfile
+      args:
+        - USERNAME=tankbot
+    image: machx:dev
+    container_name: robot1
+    env_file:
+      - ../config/.env
+    network_mode: host
+    volumes:
+      - ../../machx_code:/home/tankbot/machx_code
+      - ../volumes/entrypoint.sh:/home/tankbot/entrypoint.sh
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+      - "/dev/video0:/dev/video0"
+    entrypoint: [ "/home/tankbot/entrypoint.sh" ]
